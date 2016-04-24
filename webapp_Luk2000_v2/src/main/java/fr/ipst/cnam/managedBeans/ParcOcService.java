@@ -9,7 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import fr.ipst.cnam.daos.ManagerDAO;
 import fr.ipst.cnam.daos.OcDAO;
 import fr.ipst.cnam.daos.OcDAOInterface;
-import fr.ipst.cnam.entities.LazyParcOcModel;
+import fr.ipst.cnam.entities.ParcOc;
 import fr.ipst.cnam.entities.Oc;
 
 @ManagedBean(name="parcOcService")
@@ -18,11 +18,7 @@ public class ParcOcService {
 	
 	public List<Oc> getParcOc()
 	{
-		EntityManagerFactory emf = ManagerDAO.getInstance();
-		OcDAOInterface dao = new OcDAO(emf);
-		
-		List<Oc> list = dao.findAllOc();
-		return list;
+		return ParcOc.getInstance();
 	}
 
 }
