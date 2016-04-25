@@ -1,45 +1,21 @@
 package fr.ipst.cnam.test;
 
-import java.util.Iterator;
-import java.util.List;
-
 import javax.persistence.EntityManagerFactory;
 
 import fr.ipst.cnam.daos.ManagerDAO;
-import fr.ipst.cnam.daos.OcDAO;
-import fr.ipst.cnam.daos.OcDAOInterface;
-import fr.ipst.cnam.entities.Oc;
+import fr.ipst.cnam.daos.UserDAO;
+import fr.ipst.cnam.daos.UserDAOInterface;
+import fr.ipst.cnam.entities.User;
 
 public class Control {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
 		EntityManagerFactory emf = ManagerDAO.getInstance();
-		OcDAOInterface dao = new OcDAO(emf);
+		UserDAOInterface dao = new UserDAO(emf);
 		
-		List<Oc> list = dao.findAllOc();
-		
-		if(list == null)
-		{
-			System.out.println("vide");
-		}else
-		{
-			System.out.println("pleine");
-		}
-		
-		/**/
-		Iterator<Oc> it = list.iterator();
-		
-		
-		
-		
-		while(it.hasNext())
-		{
-			Oc oc = it.next();
-			System.out.println(oc.getDomaineAct());
-		}
-		
+		User user = dao.findUser("Lamblin", "e.lamblin");
+		System.out.println(user.getPrenom());
 
 	}
 

@@ -1,6 +1,7 @@
 package fr.ipst.cnam.controllers;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -8,6 +9,7 @@ import fr.ipst.cnam.daos.ManagerDAO;
 import fr.ipst.cnam.daos.OcDAO;
 import fr.ipst.cnam.daos.OcDAOInterface;
 import fr.ipst.cnam.entities.Oc;
+import fr.ipst.cnam.entities.ParcOc;
 import fr.ipst.cnam.managedBeansDialog.CreerOc;
 
 public class CrudOc {
@@ -25,6 +27,11 @@ public class CrudOc {
 		EntityManagerFactory emf = ManagerDAO.getInstance();
 		OcDAOInterface dao = new OcDAO(emf);
 		dao.persistOc(oc);
+	}
+	
+	public static List<Oc> getParcOcInstance()
+	{
+		return ParcOc.getInstance();
 	}
 
 }

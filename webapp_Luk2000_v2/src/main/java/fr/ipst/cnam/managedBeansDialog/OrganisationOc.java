@@ -1,4 +1,4 @@
-package fr.ipst.cnam.managedBeans;
+package fr.ipst.cnam.managedBeansDialog;
 
 import java.util.List;
 
