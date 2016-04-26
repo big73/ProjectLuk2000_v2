@@ -57,7 +57,49 @@ public class OcDAO implements OcDAOInterface{
 
 	@Override
 	public void updateOc(Oc oc) {
-		// TODO Auto-generated method stub
+		/*
+		   Query query = em.createQuery(
+	      "UPDATE Country SET population = population * 11 / 10 " +
+	      "WHERE c.population < :p");
+	  		int updateCount = query.setParameter(p, 100000).executeUpdate();
+		 */
+		
+		String nouveauNomOc = oc.getNom();
+		String nouveauDomainAct = oc.getDomaineAct();
+		int nouveauIdProprio = oc.getIdProprietaire();
+		
+		Oc ocAModifier = null;
+		EntityManager em = null;
+		try
+		{
+			em = getEntityManager();
+			em.getTransaction().begin();
+			ocAModifier = em.find(Oc.class, oc.getId());
+			
+			Query queryNom = em.createQuery(
+					"UPDATE Oc o SET o.nom = ?1 where o.id = ?2")
+					.setParameter(1, nouveauNomOc)
+					.setParameter(2, ocAModifier.getId());
+					queryNom.executeUpdate();
+					
+			Query queryDomainAct = em.createQuery(
+					"UPDATE Oc o SET o.domaineAct = ?1 where o.id = ?2")
+					.setParameter(1, nouveauDomainAct)
+					.setParameter(2, ocAModifier.getId());;
+			queryDomainAct.executeUpdate();
+			
+			Query queryIdProprio = em.createQuery(
+					"UPDATE Oc o SET o.idProprietaire = ?1 where o.id = ?2")
+					.setParameter(1, nouveauIdProprio)
+					.setParameter(2, ocAModifier.getId());;
+			queryIdProprio.executeUpdate();
+			
+			em.getTransaction().commit();
+		}
+		finally
+		{
+			em.close();
+		}
 		
 	}
 

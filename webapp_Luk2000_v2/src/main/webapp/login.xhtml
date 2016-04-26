@@ -9,11 +9,9 @@
 	<title>Login</title>
 </h:head> 
 <body> 
-
-	<h3>Page d'authentification</h3>
 	
 	<h:form id="form" >
-    <p:panel id="panel" header="Form"  style="margin-bottom:10px;">
+    <p:panel id="panel" header="Page d'authentification"  style="margin-bottom:10px;">
         <p:messages id="messages" />
         <h:panelGrid columns="3" cellpadding="5">
         
@@ -27,11 +25,13 @@
             <p:message for="passwd" />
             
         </h:panelGrid>
+
+        
     </p:panel>
     <p:toolbar>
         <f:facet name="left">
             <p:commandButton 
-            		value="Se connecter" update="panel" action="#{loginService.login}"            		           		
+            		value="Se connecter" ajax="false" update="panel" action="#{loginService.login}"            		           		
             		style="margin-right:20px;" />
         </f:facet>
         

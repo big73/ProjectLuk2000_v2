@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body> 
+
+	
+	<h:form id="form" >
+    <p:panel id="panel" header="Mise à jour d'un OC" 
+    style="margin-bottom:10px;">
+        <p:messages id="messages" />
+        <h:panelGrid columns="3" cellpadding="5">
+        
+            <p:outputLabel for="nomOc" value="Nom OC :" />
+            <p:inputText id="nomOc"  value="#{OrganisationOc.ocSelected.nom}" required="true" label="nomOc"/>
+            <p:message for="nomOc" />
+ 
+            <p:outputLabel for="domainAct" value="Domaine d'activité :" />
+            <p:inputText id="domainAct"  value="#{OrganisationOc.ocSelected.domaineAct}" required="true" label="domainAct"/>
+            <p:message for="domainAct" />
+            
+            <p:outputLabel for="idProprio" value="Id propriétaire :" />
+            <p:inputText id="idProprio"  value="#{OrganisationOc.ocSelected.idProprietaire}" required="true" label="idProprio"/>
+            <p:message for="idProprio" />
+            
+        </h:panelGrid>
+
+        
+    </p:panel>
+    <p:toolbar>
+        <f:facet name="left">
+            <p:commandButton 
+            		value="Mettre à jour" ajax="false" update="panel" 
+            		action="#{OrganisationOc.modifierOc()}"          		           		
+            		style="margin-right:20px;">
+            		 </p:commandButton>
+        </f:facet>
+        
+    </p:toolbar> 
+    
+</h:form>
+
+</body> 
+</html>

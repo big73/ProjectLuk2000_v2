@@ -33,5 +33,10 @@ public class CrudOc {
 	{
 		return ParcOc.getInstance();
 	}
+	
+	public void modifierOc(int idOc, String nomOc, String domainAct, int idProprio)
+	{
+		System.out.println(domainAct +" "+idProprio);
+	}
 
 }

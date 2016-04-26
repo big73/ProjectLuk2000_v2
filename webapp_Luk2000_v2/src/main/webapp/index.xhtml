@@ -39,6 +39,14 @@
                         icon="ui-icon-search" title="View">
                 <f:setPropertyActionListener value="#{oc}" target="#{OrganisationOc.ocSelected}" />
             </p:commandButton>
+           
+            </p:column>
+            <p:column style="width:32px;text-align: center">
+                <p:commandButton 
+                        action="/updateOc.xhtml"
+                        icon="icon-wrench-1" title="Mettre à jour">
+                <f:setPropertyActionListener value="#{oc}" target="#{OrganisationOc.ocSelected}" />
+            </p:commandButton>
         </p:column>
     </p:dataTable>
 

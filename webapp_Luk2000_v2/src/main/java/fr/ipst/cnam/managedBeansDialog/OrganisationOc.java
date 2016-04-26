@@ -6,7 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
@@ -15,7 +15,7 @@ import org.primefaces.event.UnselectEvent;
 import fr.ipst.cnam.entities.Oc;
 
 @ManagedBean(name="OrganisationOc")
-@RequestScoped
+@SessionScoped
 public class OrganisationOc {
 	
 	List<Oc> parcOc;
@@ -36,7 +36,11 @@ public class OrganisationOc {
 		
 	}
 
-	
+	public void modifierOc()
+	{
+		System.out.println("modifierOC dans organisationOC");
+		System.out.println(this.ocSelected.getIdProprietaire());
+	}
 
 	public List<Oc> getParcOc() {
 		return parcOc;
