@@ -57,12 +57,6 @@ public class OcDAO implements OcDAOInterface{
 
 	@Override
 	public void updateOc(Oc oc) {
-		/*
-		   Query query = em.createQuery(
-	      "UPDATE Country SET population = population * 11 / 10 " +
-	      "WHERE c.population < :p");
-	  		int updateCount = query.setParameter(p, 100000).executeUpdate();
-		 */
 		
 		String nouveauNomOc = oc.getNom();
 		String nouveauDomainAct = oc.getDomaineAct();
