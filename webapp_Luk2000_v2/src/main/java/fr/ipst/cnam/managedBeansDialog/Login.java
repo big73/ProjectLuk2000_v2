@@ -1,14 +1,23 @@
 package fr.ipst.cnam.managedBeansDialog;
 
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.EntityManagerFactory;
 
 import org.primefaces.context.RequestContext;
 
 import fr.ipst.cnam.controllers.ControlPrivilege;
+import fr.ipst.cnam.daos.ManagerDAO;
+import fr.ipst.cnam.daos.PrivilegeDAO;
+import fr.ipst.cnam.daos.PrivilegeDAOInterface;
+import fr.ipst.cnam.daos.UserDAO;
+import fr.ipst.cnam.daos.UserDAOInterface;
+import fr.ipst.cnam.entities.Privilege;
 import fr.ipst.cnam.entities.User;
 
 @ManagedBean(name="loginService")
@@ -33,8 +42,9 @@ public class Login {
 		return "OK";
 	}
 	
-	public String login()
+	 public String login()
 	{
+		
 		ControlPrivilege control = new ControlPrivilege();
 		User user = control.login(this.login, this.passwd);
 		
@@ -46,13 +56,7 @@ public class Login {
 		}
 		else
 		{
-			userBean.setId(user.getId());
-			userBean.setMail(user.getMail());
-			userBean.setNom(user.getNom());
-			userBean.setPassword(user.getPassword());
-			userBean.setPrenom(user.getPrenom());
-			userBean.setStatut(user.getStatut());
-			userBean.setTel(user.getTel());
+			userBean.setUser(user);
 			
 			return "OK";
 		}

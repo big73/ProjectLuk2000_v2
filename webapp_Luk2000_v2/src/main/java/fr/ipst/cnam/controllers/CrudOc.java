@@ -36,7 +36,15 @@ public class CrudOc {
 	
 	public void modifierOc(int idOc, String nomOc, String domainAct, int idProprio)
 	{
-		System.out.println(domainAct +" "+idProprio);
+		Oc oc = new Oc();
+		oc.setId(idOc);
+		oc.setNom(nomOc);
+		oc.setDomaineAct(domainAct);
+		oc.setIdProprietaire(idProprio);
+		
+		EntityManagerFactory emf = ManagerDAO.getInstance();
+		OcDAOInterface dao = new OcDAO(emf);
+		dao.updateOc(oc);
 	}
 
 }

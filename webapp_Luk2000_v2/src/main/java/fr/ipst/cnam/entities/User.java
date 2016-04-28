@@ -1,7 +1,14 @@
 package fr.ipst.cnam.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 
 /**
@@ -29,6 +36,18 @@ public class User implements Serializable {
 	private String statut;
 
 	private String tel;
+	
+	private static List<Privilege> packPrivileges;
+	
+	
+
+	public static List<Privilege> getPackPrivileges() {
+		return packPrivileges;
+	}
+
+	public static void setPackPrivileges(List<Privilege> packPrivileges) {
+		User.packPrivileges = packPrivileges;
+	}
 
 	public User() {
 	}

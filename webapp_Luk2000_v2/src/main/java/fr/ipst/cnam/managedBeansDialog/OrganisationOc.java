@@ -12,6 +12,8 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 
+import fr.ipst.cnam.controllers.ControlPrivilege;
+import fr.ipst.cnam.controllers.CrudOc;
 import fr.ipst.cnam.entities.Oc;
 
 @ManagedBean(name="OrganisationOc")
@@ -23,10 +25,14 @@ public class OrganisationOc {
 	@ManagedProperty("#{parcOcService}")
 	private ParcOcService parcOcService;
 	
+	@ManagedProperty("#{userBean}")
+	private UserBean userBean;
+	
 	private Oc ocSelected;
 	
 	public OrganisationOc() {
 		System.out.println("appel du constructeur");
+		//System.out.println(this.userBean.getPrenom());
 	}
 	
 	@PostConstruct
@@ -35,11 +41,25 @@ public class OrganisationOc {
 		parcOc = parcOcService.getParcOc();
 		
 	}
-
+		
 	public void modifierOc()
 	{
-		System.out.println("modifierOC dans organisationOC");
-		System.out.println(this.ocSelected.getIdProprietaire());
+		ControlPrivilege control = new ControlPrivilege();
+		boolean droitModification = control.checkPrivileges(userBean.getUser(), ocSelected, "m");
+		
+		if(droitModification == false)
+		{
+			FacesMessage msg = new FacesMessage("Privilèges insuffisant !");
+	        FacesContext.getCurrentInstance().addMessage(null, msg);
+		}
+		else
+		{
+			CrudOc controlCrudoc = new CrudOc();
+			controlCrudoc.modifierOc(ocSelected.getId()
+					, ocSelected.getNom(), 
+					ocSelected.getDomaineAct(), 
+					ocSelected.getIdProprietaire());
+		}
 	}
 
 	public List<Oc> getParcOc() {
@@ -76,6 +96,15 @@ public class OrganisationOc {
         
     	FacesContext.getCurrentInstance().addMessage(null, msg);
     }
+
+	public UserBean getUserBean() {
+		return userBean;
+	}
+
+	public void setUserBean(UserBean userBean) {
+		this.userBean = userBean;
+	}
 	
+    
 
 }
