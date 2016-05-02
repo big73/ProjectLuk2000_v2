@@ -3,18 +3,36 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"  
+      xmlns:p="http://primefaces.org/ui"
+      
+        
       > 
 
-<h:head></h:head> 
+<h:head>
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"></link>
+</h:head> 
 <body> 
 
-	<h3>parc oc</h3>
+	<h3>Liste des OCs</h3>
+	
 	
 	
 	<h:form id="form">
-    <p:growl id="msgs" showDetail="true" />
-	<p:dataTable style="width: 50%;" var="oc" 
+	
+	<p:toolbar>
+        <f:facet name="left">
+            
+           <p:commandButton 
+            		value="Créer un OC" ajax="false" update="panel" 
+            		action="/creeroc.xhtml"          		           		
+            		style="margin-right:20px;">
+            		 </p:commandButton>
+        </f:facet>
+        
+    </p:toolbar> 
+	
+    <p:growl id="msgs" showDetail="true" />    
+	<p:dataTable style="width: 100%;" var="oc" 
             value="#{OrganisationOc.parcOc}" 
             rows="10"
                          paginator="true"
@@ -22,39 +40,74 @@
                          rowsPerPageTemplate="5,10,15"
             >
             
+            
      		<!-- les données de la table -->
-	        <p:column headerText="Id" >
+	        <p:column headerText="Id" style="width: 10%;">
 	            <h:outputText value="#{oc.id}" />
 	        </p:column>
-	        <p:column headerText="Nom" >
+	        <p:column headerText="Nom" style="width: 25%;">
 	            <h:outputText value="#{oc.nom}" />
 	        </p:column>
-	        <p:column headerText="Domaine d'activité" >
+	        <p:column headerText="Domaine d'activité" style="width: 25%;">
 	            <h:outputText value="#{oc.domaineAct}" />
 	        </p:column>
-	       <p:column style="width:32px;text-align: center">
-                <p:commandButton 
+	        
+	       <p:column style="width:5%;text-align: center">
+	              <p:commandButton 
                         update=":form:ocDetail" 
                         oncomplete="PF('ocDialog').show()" 
                         icon="ui-icon-search" title="View">
                 <f:setPropertyActionListener value="#{oc}" target="#{OrganisationOc.ocSelected}" />
-            </p:commandButton>
-           
+            </p:commandButton>           
             </p:column>
-            <p:column style="width:32px;text-align: center">
+            
+            <p:column style="width:5%;text-align: center">
                 <p:commandButton 
+                		icon="ui-icon-wrench"
                         action="/updateOc.xhtml"
-                        icon="icon-wrench-1" title="Mettre à jour">
+                        title="Mettre à jour">
                 <f:setPropertyActionListener value="#{oc}" target="#{OrganisationOc.ocSelected}" />
             </p:commandButton>
         </p:column>
+        
+        <p:column style="width:5%;text-align: center">
+                <p:commandButton 
+                		icon="ui-icon-trash"
+                        action="#{OrganisationOc.supprimerOc()}"
+                        title="Supprimer l'OC">
+                <f:setPropertyActionListener value="#{oc}" target="#{OrganisationOc.ocSelected}" />
+            </p:commandButton>
+        </p:column>
+        
+        <p:column style="width:5%;text-align: center">
+	              <p:commandButton 
+                        update=":form:ocMessagerie" 
+                        oncomplete="PF('ocMessagerie').show()" 
+                        icon="ui-icon-mail-closed" title="Messagerie">
+                <f:setPropertyActionListener value="#{oc}" target="#{OrganisationOc.ocSelected}" />
+            </p:commandButton>           
+            </p:column>
+        
     </p:dataTable>
+    
+    <p:dialog header="Messagerie OC" widgetVar="ocMessagerie" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        <p:outputPanel id="ocMessagerie" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty OrganisationOc.ocSelected}" columnClasses="label,value">
+                <f:facet name="header">                    
+                </f:facet> 
+                <h:outputText value="Non implémenté :(" />       
+ 
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+    
+ 
 
     <p:dialog header="Détail OC" widgetVar="ocDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
         <p:outputPanel id="ocDetail" style="text-align:center;">
             <p:panelGrid  columns="2" rendered="#{not empty OrganisationOc.ocSelected}" columnClasses="label,value">
                 <f:facet name="header">
-                    <!--<p:graphicImage name="demo/images/car/#{dtSelectionView.selectedCar.brand}-big.gif"/> -->
+                    
                 </f:facet>
  
                 <h:outputText value="Id :" />

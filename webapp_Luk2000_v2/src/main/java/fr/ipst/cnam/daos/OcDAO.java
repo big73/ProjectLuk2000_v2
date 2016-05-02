@@ -99,7 +99,19 @@ public class OcDAO implements OcDAOInterface{
 
 	@Override
 	public void destroyOc(Oc oc) {
-		// TODO Auto-generated method stub
+		EntityManager em = null;
+		try
+		{
+			em = getEntityManager();
+			em.getTransaction().begin();
+			em.getReference(Oc.class, oc.getId());
+			em.remove(oc);
+			em.getTransaction().commit();
+		}
+		finally
+		{
+			em.close();
+		}
 		
 	}
 

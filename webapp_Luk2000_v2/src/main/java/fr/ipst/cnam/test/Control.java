@@ -27,5 +27,10 @@ public class Control {
 		}
 
 	}
+	
+	static public int getAge()
+	{
+		return 3;
+	}
 
 }

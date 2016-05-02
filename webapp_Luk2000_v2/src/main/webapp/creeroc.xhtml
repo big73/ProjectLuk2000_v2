@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<title>Création d'OC</title>
+</h:head> 
+<body> 
+
+	<h3>Page de création des Objets Connectés</h3>
+	
+	<h:form id="form" >
+	<p:panel id="panel" header="Page de création d'un OC"  style="margin-bottom:10px;">
+	<p:messages id="messages" />
+        <h:panelGrid columns="3" cellpadding="5">
+        
+		<h:outputLabel value="Saisir le nom d'un Objet Connecté: " />
+		<h:inputText value="#{creerOc.nom}" /><br />
+		
+		<h:outputLabel value="Saisir le domaine d'activité: " />
+		<h:inputText value="#{creerOc.domaineAct}" /><br />
+		
+		<h:outputLabel value="Saisir l'id du propriétaire: " />
+		<h:inputText value="#{creerOc.userBean.user.id}" /><br/>
+	</h:panelGrid>	
+		
+	</p:panel>
+	
+	 <p:toolbar>
+        <f:facet name="left">
+            <p:commandButton 
+            		ajax="false" update="panel" action="#{creerOc.valider()}" value="Créer"           		           		
+            		style="margin-right:20px;" />
+             <p:commandButton 
+            		value="Valider les modifications" ajax="false" update="panel" 
+            		action="/index.xhtml"          		           		
+            		style="margin-right:20px;">
+            		 </p:commandButton>
+        </f:facet>
+        
+    </p:toolbar> 
+	
+	</h:form>
+
+</body> 
+</html>

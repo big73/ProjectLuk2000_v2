@@ -14,6 +14,7 @@ import org.primefaces.event.UnselectEvent;
 
 import fr.ipst.cnam.controllers.ControlPrivilege;
 import fr.ipst.cnam.controllers.CrudOc;
+import fr.ipst.cnam.entities.Message;
 import fr.ipst.cnam.entities.Oc;
 
 @ManagedBean(name="OrganisationOc")
@@ -28,6 +29,13 @@ public class OrganisationOc {
 	@ManagedProperty("#{userBean}")
 	private UserBean userBean;
 	
+	/*
+	@ManagedProperty("#{messageBean}")
+	private MessageBean messageBean;
+	*/
+	
+	//private Message msg;
+	
 	private Oc ocSelected;
 	
 	public OrganisationOc() {
@@ -41,7 +49,13 @@ public class OrganisationOc {
 		parcOc = parcOcService.getParcOc();
 		
 	}
-		
+	
+	public String creerOc()
+	{
+		System.out.println("ok creeroc");
+		return "OK";
+	}
+	
 	public void modifierOc()
 	{
 		ControlPrivilege control = new ControlPrivilege();
@@ -59,6 +73,25 @@ public class OrganisationOc {
 					, ocSelected.getNom(), 
 					ocSelected.getDomaineAct(), 
 					ocSelected.getIdProprietaire());
+		}
+	}
+	
+	public void supprimerOc()
+	{
+		ControlPrivilege control = new ControlPrivilege();
+		boolean droitSuppression = control.checkPrivileges(userBean.getUser(), ocSelected, "s");
+		if(droitSuppression == false)
+		{
+			/*
+			FacesMessage msg = new FacesMessage("Privilèges insuffisant !");
+	        FacesContext.getCurrentInstance().addMessage(null, msg);
+	        */
+			fatal();
+		}
+		else
+		{
+			CrudOc controlCrudOc = new CrudOc();
+			controlCrudOc.supprimerOC(ocSelected);
 		}
 	}
 
@@ -105,6 +138,10 @@ public class OrganisationOc {
 		this.userBean = userBean;
 	}
 	
-    
+	public void fatal() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "System Error"));
+    }
+
+	
 
 }

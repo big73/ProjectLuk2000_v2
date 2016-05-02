@@ -13,5 +13,23 @@
     		<to-view-id>/index.xhtml</to-view-id>
     	</navigation-case>
     </navigation-rule>
+    
+    <navigation-rule>
+    	<from-view-id>/index.xhtml</from-view-id>
+    	<navigation-case>
+    		<from-action>#{OrganisationOc.creerOc}</from-action>
+    		<from-outcome>OK</from-outcome>
+    		<to-view-id>/creeroc.xhtml</to-view-id>
+    	</navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+    	<from-view-id>/creeroc.xhtml</from-view-id>
+    	<navigation-case>
+    		<from-action>#{creerOc.valider}</from-action>
+    		<from-outcome>OK</from-outcome>
+    		<to-view-id>/index.xhtml</to-view-id>
+    	</navigation-case>
+    </navigation-rule>
 
 </faces-config>

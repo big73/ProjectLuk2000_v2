@@ -1,8 +1,17 @@
 package fr.ipst.cnam.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -38,6 +47,19 @@ public class Message implements Serializable {
 	private String titre;
 
 	public Message() {
+	}
+	
+	public Message(String titre, String contenu,
+			int idOc, int idServiceEmetteur, String optionAB) {
+			
+			
+			this.dateEnvoi = new Date();
+			this.titre = titre;
+			this.contenu = contenu;
+			this.idOc = idOc;
+			
+			this.idServiceEmetteur = idServiceEmetteur;
+			this.optionAB = optionAB;
 	}
 
 	public int getId() {

@@ -21,7 +21,7 @@ public class CrudOc {
 		//on initialise la date en temps réel
 		oc.setDateCrea(new Date());
 		oc.setDomaineAct(creeroc.getDomaineAct());
-		oc.setIdProprietaire(creeroc.getIdProprio());
+		oc.setIdProprietaire(creeroc.getUserBean().getUser().getId());
 		oc.setNom(creeroc.getNom());
 		
 		EntityManagerFactory emf = ManagerDAO.getInstance();
@@ -45,6 +45,16 @@ public class CrudOc {
 		EntityManagerFactory emf = ManagerDAO.getInstance();
 		OcDAOInterface dao = new OcDAO(emf);
 		dao.updateOc(oc);
+	}
+	
+	public List<Oc> supprimerOC(Oc oc)
+	{
+		EntityManagerFactory emf = ManagerDAO.getInstance();
+		OcDAOInterface dao = new OcDAO(emf);
+		dao.destroyOc(oc);
+		
+		List<Oc> listRafrichie = dao.findAllOc();
+		return listRafrichie;
 	}
 
 }

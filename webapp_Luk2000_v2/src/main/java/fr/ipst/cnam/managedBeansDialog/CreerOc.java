@@ -2,15 +2,11 @@ package fr.ipst.cnam.managedBeansDialog;
 
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.persistence.EntityManagerFactory;
 
 import fr.ipst.cnam.controllers.CrudOc;
-import fr.ipst.cnam.daos.ManagerDAO;
-import fr.ipst.cnam.daos.OcDAO;
-import fr.ipst.cnam.daos.OcDAOInterface;
-
-@ManagedBean
+@ManagedBean(name="creerOc")
 @SessionScoped
 public class CreerOc {
 	
@@ -18,7 +14,8 @@ public class CreerOc {
 	
 	private String nom;
 	
-	private int idProprio;
+	@ManagedProperty("#{userBean}")
+	private UserBean userBean;
 
 	public String getDomaineAct() {
 		return domaineAct;
@@ -36,18 +33,20 @@ public class CreerOc {
 		this.nom = nom;
 	}
 
-	public int getIdProprio() {
-		return idProprio;
+	public UserBean getUserBean() {
+		return userBean;
 	}
 
-	public void setIdProprio(int idProprio) {
-		this.idProprio = idProprio;
+	public void setUserBean(UserBean userBean) {
+		this.userBean = userBean;
 	}
-	
-	public void valider()
+
+	public String valider()
 	{
 		CrudOc control = new CrudOc();
 		control.valider(this);
+		
+		return "OK";
 	}
 
 }
