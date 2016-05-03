@@ -72,8 +72,10 @@
         
         <p:column style="width:5%;text-align: center">
                 <p:commandButton 
-                		icon="ui-icon-trash"
+                		update=":form:ocSuppression" 
+                        oncomplete="PF('ocSuppression').show()"
                         action="#{OrganisationOc.supprimerOc()}"
+                        icon="ui-icon-trash"
                         title="Supprimer l'OC">
                 <f:setPropertyActionListener value="#{oc}" target="#{OrganisationOc.ocSelected}" />
             </p:commandButton>
@@ -83,12 +85,24 @@
 	              <p:commandButton 
                         update=":form:ocMessagerie" 
                         oncomplete="PF('ocMessagerie').show()" 
-                        icon="ui-icon-mail-closed" title="Messagerie">
+                        icon="ui-icon-mail-closed" 
+                        title="Messagerie">
                 <f:setPropertyActionListener value="#{oc}" target="#{OrganisationOc.ocSelected}" />
             </p:commandButton>           
             </p:column>
         
     </p:dataTable>
+    
+    <p:dialog header="qqch" widgetVar="ocSuppression" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        <p:outputPanel id="ocSuppression" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty OrganisationOc.ocSelected}" columnClasses="label,value">
+                <f:facet name="header">                    
+                </f:facet> 
+                <h:outputText value="#{OrganisationOc.resultSuppression}" />       
+ 
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
     
     <p:dialog header="Messagerie OC" widgetVar="ocMessagerie" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
         <p:outputPanel id="ocMessagerie" style="text-align:center;">

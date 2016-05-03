@@ -102,10 +102,17 @@ public class OcDAO implements OcDAOInterface{
 		EntityManager em = null;
 		try
 		{
+			/*
+			 Query query = manager.createNativeQuery("DELETE FROM DEPARTMENT WHERE ID = " + departmentId);
+			query.executeUpdate();
+			 */
 			em = getEntityManager();
 			em.getTransaction().begin();
-			em.getReference(Oc.class, oc.getId());
-			em.remove(oc);
+			Query query = em.createQuery("delete from Oc where id = ?1");
+			query.setParameter(1, oc.getId());
+			query.executeUpdate();
+			//em.getReference(Oc.class, oc.getId());
+			//em.remove(oc);
 			em.getTransaction().commit();
 		}
 		finally

@@ -11,5 +11,7 @@ public interface PrivilegeDAOInterface {
 	public EntityManager getEntityManager();
 	
 	public List<Privilege> findPrivileges(int idUser);
+	
+	public void addPrivilege(Privilege privilege);
 
 }

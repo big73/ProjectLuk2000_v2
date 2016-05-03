@@ -46,7 +46,7 @@ public class OrganisationOc {
 	@PostConstruct
 	public void init()
 	{
-		parcOc = parcOcService.getParcOc();
+		parcOc = CrudOc.getParcOcInstance();
 		
 	}
 	
@@ -76,22 +76,31 @@ public class OrganisationOc {
 		}
 	}
 	
+	private String resultSuppression = null;
+	
+	public String getResultSuppression() {
+		return resultSuppression;
+	}
+	
+	public void setResultSuppression(String resultSuppression) {
+		this.resultSuppression = resultSuppression;
+	}
+	
 	public void supprimerOc()
 	{
+		setResultSuppression(null);
 		ControlPrivilege control = new ControlPrivilege();
 		boolean droitSuppression = control.checkPrivileges(userBean.getUser(), ocSelected, "s");
 		if(droitSuppression == false)
 		{
-			/*
-			FacesMessage msg = new FacesMessage("Privilèges insuffisant !");
-	        FacesContext.getCurrentInstance().addMessage(null, msg);
-	        */
-			fatal();
+			setResultSuppression("Privilèges insuffisant !");
 		}
 		else
 		{
+			setResultSuppression("Objet connecté supprimé avec succès !");
 			CrudOc controlCrudOc = new CrudOc();
 			controlCrudOc.supprimerOC(ocSelected);
+			init();
 		}
 	}
 

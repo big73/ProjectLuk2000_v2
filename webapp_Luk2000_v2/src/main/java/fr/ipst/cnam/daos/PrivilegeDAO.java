@@ -43,5 +43,21 @@ public class PrivilegeDAO implements PrivilegeDAOInterface{
 		}
 		return list;
 	}
+	
+	@Override
+	public void addPrivilege(Privilege privilege)
+	{
+		EntityManager em = null;
+		try
+		{
+			em.getTransaction().begin();
+			em.persist(privilege);
+			em.getTransaction().commit();
+		}
+		finally
+		{
+			//em.close();
+		}
+	}
 
 }
