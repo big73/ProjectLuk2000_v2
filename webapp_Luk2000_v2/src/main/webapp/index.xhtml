@@ -15,7 +15,7 @@
 
 <body> 
 
-	<h3>Liste des OCs</h3>	
+	<h3>Liste des objets connectés</h3>	
 	
 	<h:form id="form">
 	
@@ -25,7 +25,7 @@
            <p:commandButton 
             		value="Créer un OC" ajax="false" 
             		action="/creeroc.xhtml"          		           		
-            		style="margin-right:20px;">
+            		style="margin-right:20px;background:orange;">
             		 </p:commandButton>
             		 
         </f:facet>
@@ -34,8 +34,8 @@
            <p:commandButton 
             		value="Se déconnecter" ajax="false" 
             		action="#{loginService.logout}"          		           		
-            		style="margin-right:20px;">
-            		 </p:commandButton>
+            		style="margin-right:20px; background:red;">
+           </p:commandButton>
             		 
         </f:facet>
         

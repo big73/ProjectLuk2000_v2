@@ -105,12 +105,7 @@ public class OrganisationOc {
 			parcOc = controlCrudOc.supprimerOC(ocSelected);
 			System.out.println("parcour de la liste après bd");
 			Iterator<Oc> it1 = parcOc.iterator();
-			while(it1.hasNext())
-			{
-				Oc oc = it1.next();
-				System.out.println("it1 : " + oc.getId());
-			}
-			
+						
 			setResultSuppression("Objet connecté supprimé avec succès !");
 			//RequestContext.getCurrentInstance().reset("form:form");
 		}

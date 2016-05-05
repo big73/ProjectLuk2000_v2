@@ -41,11 +41,11 @@ public class User implements Serializable {
 	
 	
 
-	public static List<Privilege> getPackPrivileges() {
+	public List<Privilege> getPackPrivileges() {
 		return packPrivileges;
 	}
 
-	public static void setPackPrivileges(List<Privilege> packPrivileges) {
+	public void setPackPrivileges(List<Privilege> packPrivileges) {
 		User.packPrivileges = packPrivileges;
 	}
 
