@@ -1,23 +1,14 @@
 package fr.ipst.cnam.managedBeansDialog;
 
-import java.util.List;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.EntityManagerFactory;
 
 import org.primefaces.context.RequestContext;
 
 import fr.ipst.cnam.controllers.ControlPrivilege;
-import fr.ipst.cnam.daos.ManagerDAO;
-import fr.ipst.cnam.daos.PrivilegeDAO;
-import fr.ipst.cnam.daos.PrivilegeDAOInterface;
-import fr.ipst.cnam.daos.UserDAO;
-import fr.ipst.cnam.daos.UserDAOInterface;
-import fr.ipst.cnam.entities.Privilege;
 import fr.ipst.cnam.entities.User;
 
 @ManagedBean(name="loginService")
@@ -61,10 +52,13 @@ public class Login {
 			return "OK";
 		}
 	}
+	 
+	 
 	
 	public String logout()
 	{
-		return null;
+		userBean.setUser(null);
+		return "OK";
 	}
 
 	public String getLogin() {
