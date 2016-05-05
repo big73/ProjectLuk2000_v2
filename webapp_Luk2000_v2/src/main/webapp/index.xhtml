@@ -85,11 +85,9 @@
                 <p:commandButton 
                 		oncomplete="PF('ocSuppression').show()"
                         title="Supprimer l'OC"
-                        action="#{OrganisationOc.supprimerOc()}"
-                        
+                        action="#{OrganisationOc.supprimerOc()}"                        
                         icon="ui-icon-trash"
-                        update=":form:ocSuppression"                 		
-                        >
+                        update=":form:ocSuppression">
                 <f:setPropertyActionListener value="#{oc}" target="#{OrganisationOc.ocSelected}" />
             	<!-- <p:resetInput target="form" /> -->
             </p:commandButton>
@@ -97,12 +95,12 @@
         
         <p:column style="width:5%;text-align: center">
 	              <p:commandButton 
-                        update=":form:ocMessagerie" 
-                        oncomplete="PF('ocMessagerie').show()" 
-                        icon="ui-icon-mail-closed" 
-                        title="Messagerie">
-                <f:setPropertyActionListener value="#{oc}" target="#{OrganisationOc.ocSelected}" />
-            	
+	              		oncomplete="PF('ocMessagerie').show()"
+	              		title="Utiliser l'OC"
+	              		action="#{messagerieService.utiliserServiceA()}"
+	              		icon="ui-icon-mail-closed" 
+                        update=":form:ocMessagerie">
+                <f:setPropertyActionListener value="#{oc}" target="#{OrganisationOc.ocSelected}" />           	
             </p:commandButton>           
             </p:column>
         
@@ -117,7 +115,7 @@
                 <p:commandButton 
                         value="OK"
                         immediate="true" ajax="false" >
-                        </p:commandButton> 
+                </p:commandButton> 
  				
             </p:panelGrid>
         </p:outputPanel>
@@ -128,7 +126,15 @@
             <p:panelGrid  columns="2" rendered="#{not empty OrganisationOc.ocSelected}" columnClasses="label,value">
                 <f:facet name="header">                    
                 </f:facet> 
-                <h:outputText value="Non implémenté :(" />       
+                
+                <h:outputText value="Titre : " />   
+                <h:outputText value="#{messagerieService.msg.titre}" />
+                
+                <h:outputText value="Contenu : " />
+                <h:outputText value="#{messagerieService.msg.contenu}" />
+                
+                <h:outputText value="id service : " />
+                <h:outputText value="#{messagerieService.msg.idServiceEmetteur}" />    
  
             </p:panelGrid>
         </p:outputPanel>

@@ -1,26 +1,16 @@
-package fr.ipst.cnam.managedBeansDialog;
+package fr.ipst.cnam.controllers;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.List;
+
 import java.util.Random;
-
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 
 import fr.ipst.cnam.entities.Message;
 import fr.ipst.cnam.entities.Oc;
 import fr.ipst.cnam.entities.User;
 
-@ManagedBean(name="messageBean")
-@SessionScoped
-public class MessageBean {
+public class ControlMessagerie {
 	
-	//
-	private static List<Message> fileMessage ;
-	
-	
-	public static Message utiliserServiceOC(Oc oc, User u, String optionAouB) throws IOException, URISyntaxException{
+		
+	public Message utiliserServiceOC(Oc oc, String optionAouB){
 		
 		Random r = new Random();  
 		
@@ -64,13 +54,13 @@ public class MessageBean {
 		}
 		m = new Message(titre, contenu, idOc, idSvc, optionAB);
 		
-		// stockage dans la file
-		fileMessage.add(m);
-		
+				
 		// envoi par mail 
+		/*
 		if(optionAB.equals("B")){
 			//m.envoyerParMail(u);
 		}
+		*/
 		return m;
 	} 
 }
