@@ -31,4 +31,10 @@ public class ParcOc {
 		}
 	}
 	
+	public static List<Oc> refresh()
+	{
+		parcOc = null;
+		return getInstance();
+	}
+	
 }

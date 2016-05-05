@@ -65,10 +65,9 @@ public class CrudOc {
 	{
 		EntityManagerFactory emf = ManagerDAO.getInstance();
 		OcDAOInterface dao = new OcDAO(emf);
-		dao.destroyOc(oc);
+		dao.destroyOc(oc);		
 		
-		List<Oc> listRafrichie = dao.findAllOc();
-		return listRafrichie;
+		return ParcOc.refresh();
 	}
 
 }

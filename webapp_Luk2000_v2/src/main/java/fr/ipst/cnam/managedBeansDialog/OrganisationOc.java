@@ -1,5 +1,6 @@
 package fr.ipst.cnam.managedBeansDialog;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,12 +10,12 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 
 import fr.ipst.cnam.controllers.ControlPrivilege;
 import fr.ipst.cnam.controllers.CrudOc;
-import fr.ipst.cnam.entities.Message;
 import fr.ipst.cnam.entities.Oc;
 
 @ManagedBean(name="OrganisationOc")
@@ -86,7 +87,7 @@ public class OrganisationOc {
 		this.resultSuppression = resultSuppression;
 	}
 	
-	public void supprimerOc()
+	public String supprimerOc()
 	{
 		setResultSuppression(null);
 		ControlPrivilege control = new ControlPrivilege();
@@ -97,11 +98,23 @@ public class OrganisationOc {
 		}
 		else
 		{
+			
+						
+			//suppression de l'oc en base de données
+			CrudOc controlCrudOc = new CrudOc();			
+			parcOc = controlCrudOc.supprimerOC(ocSelected);
+			System.out.println("parcour de la liste après bd");
+			Iterator<Oc> it1 = parcOc.iterator();
+			while(it1.hasNext())
+			{
+				Oc oc = it1.next();
+				System.out.println("it1 : " + oc.getId());
+			}
+			
 			setResultSuppression("Objet connecté supprimé avec succès !");
-			CrudOc controlCrudOc = new CrudOc();
-			controlCrudOc.supprimerOC(ocSelected);
-			init();
+			//RequestContext.getCurrentInstance().reset("form:form");
 		}
+		return "OK";
 	}
 
 	public List<Oc> getParcOc() {

@@ -11,11 +11,11 @@
 <h:head>
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"></link>
 </h:head> 
+
+
 <body> 
 
-	<h3>Liste des OCs</h3>
-	
-	
+	<h3>Liste des OCs</h3>	
 	
 	<h:form id="form">
 	
@@ -23,10 +23,11 @@
         <f:facet name="left">
             
            <p:commandButton 
-            		value="Créer un OC" ajax="false" update="panel" 
+            		value="Créer un OC" ajax="false" 
             		action="/creeroc.xhtml"          		           		
             		style="margin-right:20px;">
             		 </p:commandButton>
+            		 
         </f:facet>
         
     </p:toolbar> 
@@ -38,6 +39,7 @@
                          paginator="true"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="5,10,15"
+                         id="parcOc"
             >
             
             
@@ -72,12 +74,15 @@
         
         <p:column style="width:5%;text-align: center">
                 <p:commandButton 
-                		update=":form:ocSuppression" 
-                        oncomplete="PF('ocSuppression').show()"
+                		oncomplete="PF('ocSuppression').show()"
+                        title="Supprimer l'OC"
                         action="#{OrganisationOc.supprimerOc()}"
+                        
                         icon="ui-icon-trash"
-                        title="Supprimer l'OC">
+                        update=":form:ocSuppression"                 		
+                        >
                 <f:setPropertyActionListener value="#{oc}" target="#{OrganisationOc.ocSelected}" />
+            	<!-- <p:resetInput target="form" /> -->
             </p:commandButton>
         </p:column>
         
@@ -88,18 +93,23 @@
                         icon="ui-icon-mail-closed" 
                         title="Messagerie">
                 <f:setPropertyActionListener value="#{oc}" target="#{OrganisationOc.ocSelected}" />
+            	
             </p:commandButton>           
             </p:column>
         
     </p:dataTable>
     
-    <p:dialog header="qqch" widgetVar="ocSuppression" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+    <p:dialog header="Opération suppression" widgetVar="ocSuppression" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
         <p:outputPanel id="ocSuppression" style="text-align:center;">
             <p:panelGrid  columns="2" rendered="#{not empty OrganisationOc.ocSelected}" columnClasses="label,value">
                 <f:facet name="header">                    
                 </f:facet> 
-                <h:outputText value="#{OrganisationOc.resultSuppression}" />       
- 
+                <h:outputText value="#{OrganisationOc.resultSuppression}"/>     
+                <p:commandButton 
+                        value="OK"
+                        immediate="true" ajax="false" >
+                        </p:commandButton> 
+ 				
             </p:panelGrid>
         </p:outputPanel>
     </p:dialog>

@@ -50,6 +50,7 @@ public class PrivilegeDAO implements PrivilegeDAOInterface{
 		EntityManager em = null;
 		try
 		{
+			em = getEntityManager();
 			em.getTransaction().begin();
 			em.persist(privilege);
 			em.getTransaction().commit();
