@@ -17,7 +17,7 @@ import fr.ipst.cnam.managedBeansDialog.CreerOc;
 
 public class CrudOc {
 	
-	public void valider(CreerOc creeroc)
+	public List<Oc> valider(CreerOc creeroc)
 	{
 		Oc oc = new Oc();
 		
@@ -41,6 +41,8 @@ public class CrudOc {
 		
 		PrivilegeDAOInterface daoP = new PrivilegeDAO(emf);
 		daoP.addPrivilege(privilege);
+		
+		return ParcOc.refresh();
 	}
 	
 	public static List<Oc> getParcOcInstance()
