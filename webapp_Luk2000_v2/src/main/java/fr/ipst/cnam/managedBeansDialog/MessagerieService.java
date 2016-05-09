@@ -1,8 +1,9 @@
 package fr.ipst.cnam.managedBeansDialog;
 
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -23,6 +24,13 @@ public class MessagerieService {
 	private List<Message> messagerie;
 	
 	private Message msg;
+	
+	@PostConstruct
+	public void initList()
+	{
+		ControlMessagerie ctrl = new ControlMessagerie();
+		messagerie = ctrl.getMessagerie();
+	}
 	
 	public Message getMsg() {
 		return msg;
@@ -45,7 +53,11 @@ public class MessagerieService {
 		System.out.println("début de la méthode a");
 		ControlMessagerie control = new ControlMessagerie();
 		msg = control.utiliserServiceOC(organisationOc.getOcSelected(), null);
-				
+		
+		ControlMessagerie controlMSG = new ControlMessagerie();
+		controlMSG.persistMessage(msg);
+		
+		messagerie.add(msg);
 	}
 	
 	public void utiliserServiceB()

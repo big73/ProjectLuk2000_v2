@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `message`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `message` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `date_envoi` date NOT NULL,
   `titre` varchar(256) NOT NULL,
   `contenu` varchar(512) NOT NULL,

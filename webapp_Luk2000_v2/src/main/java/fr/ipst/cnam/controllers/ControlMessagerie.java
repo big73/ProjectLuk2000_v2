@@ -1,8 +1,15 @@
 package fr.ipst.cnam.controllers;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
+import fr.ipst.cnam.daos.ManagerDAO;
+import fr.ipst.cnam.daos.MessageDAO;
+import fr.ipst.cnam.daos.MessageDAOInterface;
+
+import javax.persistence.EntityManagerFactory;
 
 import fr.ipst.cnam.entities.Message;
 import fr.ipst.cnam.entities.Messagerie;
@@ -10,11 +17,24 @@ import fr.ipst.cnam.entities.Oc;
 
 public class ControlMessagerie {
 	
-	public static List<Message> getMessagerie()
+	public List<Message> getMessagerie()
 	{
-		return Messagerie.getMessagerie();
+		EntityManagerFactory emf = ManagerDAO.getInstance();
+		MessageDAOInterface dao = new MessageDAO(emf);
+		
+		return dao.findAllMessages();
 	}
 	
+	public void persistMessage(Message msg)
+	{
+		EntityManagerFactory emf = ManagerDAO.getInstance();
+		MessageDAOInterface dao = new MessageDAO(emf);
+		
+		msg.setDateEnvoi(new Date());
+		msg.setOptionAB("A");
+		
+		dao.persistMessage(msg);
+	}
 		
 	public Message utiliserServiceOC(Oc oc, String optionAouB){
 		
