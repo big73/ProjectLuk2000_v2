@@ -1,5 +1,6 @@
 package fr.ipst.cnam.managedBeansDialog;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -44,16 +45,7 @@ public class MessagerieService {
 		System.out.println("début de la méthode a");
 		ControlMessagerie control = new ControlMessagerie();
 		msg = control.utiliserServiceOC(organisationOc.getOcSelected(), null);
-		
-		if(msg == null)
-		{
-			System.out.println("msg vide");
-		}
-		else
-		{
-			System.out.println("msg plein");
-		}
-		
+				
 	}
 	
 	public void utiliserServiceB()

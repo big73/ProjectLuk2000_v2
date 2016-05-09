@@ -1,29 +1,38 @@
 package fr.ipst.cnam.test;
 
 import java.util.Iterator;
-import java.util.List;
 
-import javax.persistence.EntityManagerFactory;
-
-import fr.ipst.cnam.daos.ManagerDAO;
-import fr.ipst.cnam.daos.OcDAO;
-import fr.ipst.cnam.daos.OcDAOInterface;
-import fr.ipst.cnam.daos.PrivilegeDAO;
-import fr.ipst.cnam.daos.PrivilegeDAOInterface;
+import fr.ipst.cnam.controllers.ControlMessagerie;
+import fr.ipst.cnam.entities.Message;
 import fr.ipst.cnam.entities.Oc;
-import fr.ipst.cnam.entities.Privilege;
 
 public class Control {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		EntityManagerFactory emf = ManagerDAO.getInstance();
-		OcDAOInterface dao = new OcDAO(emf);
+		
 		
 		Oc oc = new Oc();
 		oc.setId(37);
+		oc.setDomaineAct("Domotique");
 		
-		dao.destroyOc(oc);
+		ControlMessagerie control = new ControlMessagerie();
+		control.utiliserServiceOC(oc, "A");
+		
+		Oc oc2 = new Oc();
+		oc2.setId(28);
+		oc2.setDomaineAct("tuche");
+		
+		control.utiliserServiceOC(oc2, "A");
+		
+		/*
+		Iterator<Message> it = ControlMessagerie.getMessagerie().iterator();
+		while(it.hasNext())
+		{
+			Message m = it.next();
+			System.out.println(m.getContenu());
+		}
+		*/
 
 	}
 	

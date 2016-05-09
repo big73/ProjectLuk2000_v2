@@ -1,13 +1,19 @@
 package fr.ipst.cnam.controllers;
 
 
+import java.util.List;
 import java.util.Random;
 
 import fr.ipst.cnam.entities.Message;
+import fr.ipst.cnam.entities.Messagerie;
 import fr.ipst.cnam.entities.Oc;
-import fr.ipst.cnam.entities.User;
 
 public class ControlMessagerie {
+	
+	public static List<Message> getMessagerie()
+	{
+		return Messagerie.getMessagerie();
+	}
 	
 		
 	public Message utiliserServiceOC(Oc oc, String optionAouB){
@@ -53,8 +59,12 @@ public class ControlMessagerie {
 				
 		}
 		m = new Message(titre, contenu, idOc, idSvc, optionAB);
+		System.out.println("début du stockage "+ m.getContenu());
+		int size = Messagerie.getMessagerie().size();
+		Messagerie.getMessagerie().add(size++, m);
+		System.out.println("fin du stockage");	
 		
-				
+		
 		// envoi par mail 
 		/*
 		if(optionAB.equals("B")){
